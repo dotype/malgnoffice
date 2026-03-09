@@ -1,0 +1,191 @@
+<div class="app-layout">
+    <!-- Header -->
+    <header class="app-header">
+        <!-- 왼쪽: 햄버거 버튼 + 타이틀 -->
+        <div class="header-side d-flex align-items-center gap-2">
+            <button class="header-hamburger" @click="toggleSidebar">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="d-flex align-items-center fs-5 fw-semibold text-nowrap">
+                <span>{{ appName }}</span>
+            </div>
+        </div>
+
+        <!-- 중앙: 검색박스 -->
+        <div class="header-search">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="메뉴 및 매뉴얼 검색..." v-model="searchQuery" @keyup.enter="handleSearch">
+        </div>
+
+        <!-- 오른쪽: 업로드 + 알림 + 사용자 -->
+        <div class="header-side d-flex align-items-center gap-2 justify-content-end">
+
+            <!-- 알림 -->
+            <button class="header-action" @click="toggleNotifications">
+                <i class="bi bi-bell"></i>
+                <span class="badge" v-if="notificationCount > 0">{{ notificationCount }}</span>
+            </button>
+
+            <!-- 사용자 메뉴 -->
+            <div class="user-menu" @click="toggleUserMenu">
+                <div class="user-avatar">{{ userInitial }}</div>
+                <div class="user-info">
+                    <div class="user-name">{{ userName }}</div>
+                    <div class="user-role">{{ userRole }}</div>
+                </div>
+                <i class="bi bi-chevron-down" style="color: var(--gray-500);"></i>
+
+                <!-- 드롭다운 메뉴 -->
+                <div class="user-dropdown" v-show="showUserMenu">
+                    <div class="d-flex align-items-center gap-3 p-3">
+                        <div class="user-avatar">{{ userInitial }}</div>
+                        <div>
+                            <div class="user-name">{{ userName }}</div>
+                            <div class="user-role">{{ userRole }}</div>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <a href="#/settings/account" class="user-dropdown-item" @click.stop="goToAccount">
+                        <i class="bi bi-person"></i>
+                        <span>계정 설정</span>
+                    </a>
+                    <a href="#/settings/api" class="user-dropdown-item" @click.stop="goToAPISettings">
+                        <i class="bi bi-key"></i>
+                        <span>API 키</span>
+                    </a>
+                    <hr class="m-0">
+                    <button class="user-dropdown-item text-danger" @click.stop="handleLogout">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>로그아웃</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Body Container -->
+    <div class="app-body">
+        <!-- Sidebar Overlay (모바일) -->
+        <div class="sidebar-overlay" :class="{ 'show': isMobile && sidebarVisible }" @click="closeSidebar"></div>
+
+        <!-- Sidebar -->
+        <aside class="app-sidebar" :class="{ 'show': sidebarVisible }">
+            <nav class="py-3">
+                <!-- 대시보드 -->
+                <div class="mx-2 my-1">
+                    <a href="#/home" class="nav-link" :class="{ active: isActive('/home') }" @click="closeSidebar">
+                        <i class="bi bi-speedometer2"></i>
+                        <span class="nav-label">대시보드</span>
+                    </a>
+                </div>
+
+                <!-- 사용자 -->
+                <div class="mx-2 my-1">
+                    <div class="accordion-header" :class="{ active: isAccordionOpen('users') }" @click="toggleAccordion('users')">
+                        <i class="bi bi-people icon"></i>
+                        <span>사용자</span>
+                        <i class="bi bi-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content" :class="{ open: isAccordionOpen('users') }">
+                        <a href="#/users/list" class="nav-link" :class="{ active: isActive('/users/list') }" @click="closeSidebar">
+                            <span class="nav-label">회원 목록</span>
+                        </a>
+                        <a href="#/users/grades" class="nav-link" :class="{ active: isActive('/users/grades') }" @click="closeSidebar">
+                            <span class="nav-label">등급 관리</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 상품 -->
+                <div class="mx-2 my-1">
+                    <div class="accordion-header" :class="{ active: isAccordionOpen('products') }" @click="toggleAccordion('products')">
+                        <i class="bi bi-box-seam icon"></i>
+                        <span>상품</span>
+                        <i class="bi bi-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content" :class="{ open: isAccordionOpen('products') }">
+                        <a href="#/products/list" class="nav-link" :class="{ active: isActive('/products/list') }" @click="closeSidebar">
+                            <span class="nav-label">상품 목록</span>
+                        </a>
+                        <a href="#/products/categories" class="nav-link" :class="{ active: isActive('/products/categories') }" @click="closeSidebar">
+                            <span class="nav-label">카테고리 관리</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 주문/결제 -->
+                <div class="mx-2 my-1">
+                    <div class="accordion-header" :class="{ active: isAccordionOpen('orders') }" @click="toggleAccordion('orders')">
+                        <i class="bi bi-receipt icon"></i>
+                        <span>주문/결제</span>
+                        <i class="bi bi-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content" :class="{ open: isAccordionOpen('orders') }">
+                        <a href="#/orders/list" class="nav-link" :class="{ active: isActive('/orders/list') }" @click="closeSidebar">
+                            <span class="nav-label">주문 내역</span>
+                        </a>
+                        <a href="#/orders/payments" class="nav-link" :class="{ active: isActive('/orders/payments') }" @click="closeSidebar">
+                            <span class="nav-label">결제 관리</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 통계 -->
+                <div class="mx-2 my-1">
+                    <div class="accordion-header" :class="{ active: isAccordionOpen('stats') }" @click="toggleAccordion('stats')">
+                        <i class="bi bi-bar-chart-line icon"></i>
+                        <span>통계</span>
+                        <i class="bi bi-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content" :class="{ open: isAccordionOpen('stats') }">
+                        <a href="#/stats/sales" class="nav-link" :class="{ active: isActive('/stats/sales') }" @click="closeSidebar">
+                            <span class="nav-label">매출 통계</span>
+                        </a>
+                        <a href="#/stats/visitors" class="nav-link" :class="{ active: isActive('/stats/visitors') }" @click="closeSidebar">
+                            <span class="nav-label">방문자 분석</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 홈페이지 -->
+                <div class="mx-2 my-1">
+                    <div class="accordion-header" :class="{ active: isAccordionOpen('site') }" @click="toggleAccordion('site')">
+                        <i class="bi bi-globe icon"></i>
+                        <span>홈페이지</span>
+                        <i class="bi bi-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content" :class="{ open: isAccordionOpen('site') }">
+                        <a href="#/site/banners" class="nav-link" :class="{ active: isActive('/site/banners') }" @click="closeSidebar">
+                            <span class="nav-label">배너 관리</span>
+                        </a>
+                        <a href="#/site/notices" class="nav-link" :class="{ active: isActive('/site/notices') }" @click="closeSidebar">
+                            <span class="nav-label">공지사항</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 설정 -->
+                <div class="mx-2 my-1">
+                    <div class="accordion-header" :class="{ active: isAccordionOpen('settings') }" @click="toggleAccordion('settings')">
+                        <i class="bi bi-gear icon"></i>
+                        <span>설정</span>
+                        <i class="bi bi-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content" :class="{ open: isAccordionOpen('settings') }">
+                        <a href="#/settings/general" class="nav-link" :class="{ active: isActive('/settings/general') }" @click="closeSidebar">
+                            <span class="nav-label">기본 설정</span>
+                        </a>
+                        <a href="#/settings/admin" class="nav-link" :class="{ active: isActive('/settings/admin') }" @click="closeSidebar">
+                            <span class="nav-label">관리자 계정</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            {{ content }}
+        </main>
+    </div>
+</div>
