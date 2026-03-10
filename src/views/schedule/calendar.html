@@ -43,31 +43,27 @@
                 <!-- 주차 번호 -->
                 <div class="cal-wk-num">{{ week.weekNum }}</div>
 
-                <!-- 7일 그리드 -->
+                <!-- 7일 그리드 (플랫 그리드 - dense 패킹) -->
                 <div class="cal-row-grid">
-                    <!-- 날짜 번호 행 -->
-                    <div class="cal-day-nums">
-                        <div v-for="(day, dIdx) in week.days" :key="'n'+dIdx" class="cal-day-hdr" :class="{ 'cal-day-other': !day.currentMonth, 'cal-day-today-cell': day.isToday }">
-                            <span class="cal-day-n" :class="{ 'cal-today-n': day.isToday, 'cal-sun': dIdx === 0, 'cal-sat': dIdx === 6 }">{{ day.day }}</span>
-                        </div>
+                    <!-- 날짜 번호 (row 1 고정) -->
+                    <div v-for="(day, dIdx) in week.days" :key="'n'+dIdx" class="cal-day-hdr" :class="{ 'cal-day-other': !day.currentMonth, 'cal-day-today-cell': day.isToday }" :style="{ gridColumn: dIdx + 1, gridRow: 1 }">
+                        <span class="cal-day-n" :class="{ 'cal-today-n': day.isToday, 'cal-sun': dIdx === 0, 'cal-sat': dIdx === 6 }">{{ day.day }}</span>
                     </div>
 
-                    <!-- 여러 날 걸치는 이벤트 (스팬 바) -->
-                    <div v-for="(lane, lIdx) in week.spans" :key="'ln'+lIdx" class="cal-span-row">
+                    <!-- 여러 날 걸치는 이벤트 (스팬 바) - dense 패킹으로 자동 배치 -->
+                    <template v-for="(lane, lIdx) in week.spans" :key="'ln'+lIdx">
                         <div v-for="span in lane" :key="span.id" class="cal-span-bar" :class="'cal-span-' + span.style" :style="{ gridColumn: span.col + ' / span ' + span.width }" :title="span.title">
                             <span v-if="span.showTitle">{{ span.title }}</span>
                         </div>
-                    </div>
+                    </template>
 
-                    <!-- 단일 일정 (셀별) -->
-                    <div class="cal-day-cells">
-                        <div v-for="(day, dIdx) in week.days" :key="'c'+dIdx" class="cal-day-col" :class="{ 'cal-day-other': !day.currentMonth, 'cal-day-today-cell': day.isToday }">
-                            <div v-for="ev in day.singleEvents" :key="ev.id" class="cal-ev" :class="'cal-ev-' + ev.type">
-                                <span class="cal-ev-dot" :class="'cal-ev-dot-' + ev.type"></span>
-                                <span class="cal-ev-label">{{ ev.title }}</span>
-                            </div>
+                    <!-- 단일 일정 - 각 이벤트가 독립 그리드 아이템 -->
+                    <template v-for="(day, dIdx) in week.days" :key="'d'+dIdx">
+                        <div v-for="ev in day.singleEvents" :key="ev.id" class="cal-ev" :class="'cal-ev-' + ev.type" :style="{ gridColumn: dIdx + 1 }">
+                            <span class="cal-ev-dot" :class="'cal-ev-dot-' + ev.type"></span>
+                            <span class="cal-ev-label">{{ ev.title }}</span>
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>

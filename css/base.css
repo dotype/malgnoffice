@@ -635,26 +635,20 @@ body {
     border-right: 1px solid var(--gray-200);
 }
 
-/* 7일 그리드 컨테이너 */
+/* 7일 그리드 컨테이너 (플랫 그리드 - dense 패킹) */
 .cal-row-grid {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-rows: min-content;
+    grid-auto-flow: row dense;
     min-width: 0;
 }
 
-/* 날짜 번호 행 */
-.cal-day-nums {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-}
-
 .cal-day-hdr {
-    padding: 4px 8px 0;
+    padding: 4px 8px 2px;
     border-right: 1px solid var(--gray-100);
 }
-
-.cal-day-hdr:last-child { border-right: none; }
 
 .cal-day-other .cal-day-n { color: var(--gray-300); }
 .cal-day-today-cell { background: #F0F4FF; }
@@ -682,12 +676,6 @@ body {
 .cal-sat { color: var(--primary-color); }
 
 /* 여러 날 스팬 바 */
-.cal-span-row {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    height: 22px;
-}
-
 .cal-span-bar {
     padding: 0 4px 0 12px;
     border-radius: 0;
@@ -727,22 +715,6 @@ body {
     background: #DEEBFF;
     color: #0747A6;
 }
-
-/* 단일 이벤트 셀 */
-.cal-day-cells {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-}
-
-.cal-day-col {
-    padding: 0;
-    border-right: 1px solid var(--gray-100);
-}
-
-.cal-day-col:last-child { border-right: none; }
-
-.cal-day-col.cal-day-other { background: var(--gray-50); }
-.cal-day-col.cal-day-today-cell { background: #F0F4FF; }
 
 /* 단일 이벤트 아이템 */
 .cal-ev {
