@@ -615,10 +615,10 @@ body {
 .cal-weekday-sun { color: #DE350B; }
 .cal-weekday-sat { color: var(--primary-color); }
 
-/* 주별 행 (주차 + 그리드) */
+/* 주별 행 (주차 + 그리드) — 헤더와 동일한 컬럼 구조 */
 .cal-row {
     display: grid;
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 40px repeat(7, 1fr);
     border-bottom: 1px solid var(--gray-200);
 }
 
@@ -632,13 +632,15 @@ body {
     color: var(--gray-400);
     background: var(--gray-50);
     border-right: 1px solid var(--gray-200);
+    grid-row: 1 / -1;
 }
 
-/* 7일 그리드 컨테이너 */
+/* 7일 그리드 컨테이너 — 나머지 7컬럼을 모두 차지 */
 .cal-row-grid {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    grid-column: 2 / -1;
 }
 
 /* 날짜 번호 행 */
