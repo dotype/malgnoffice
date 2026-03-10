@@ -689,6 +689,7 @@ body {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
+    height: 18px;
 }
 
 .cal-span-bar {
