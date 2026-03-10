@@ -700,6 +700,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
+    height: 18px;
     line-height: 18px;
     margin: 0;
     transition: filter 0.1s;
@@ -752,15 +753,15 @@ body {
 .cal-ev {
     display: flex;
     align-items: center;
-    padding: 1px 4px;
-    border-radius: 3px;
+    padding: 0 4px;
+    border-radius: 0;
     font-size: 11px;
-    line-height: 1.5;
+    height: 18px;
+    line-height: 18px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
-    margin-bottom: 1px;
     transition: background 0.1s;
 }
 
@@ -791,9 +792,6 @@ body {
 
 .cal-ev-vacation {
     background: #E3FCEF;
-    border-radius: 0;
-    padding: 0 4px;
-    line-height: 18px;
 }
 
 .cal-ev-vacation .cal-ev-dot { display: none; }
