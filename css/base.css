@@ -653,7 +653,7 @@ body {
 }
 
 .cal-day-hdr {
-    padding: 6px 8px 2px;
+    padding: 4px 8px 0;
     border-right: 1px solid var(--gray-100);
 }
 
@@ -740,7 +740,7 @@ body {
 }
 
 .cal-day-col {
-    padding: 2px 4px;
+    padding: 0;
     border-right: 1px solid var(--gray-100);
 }
 
