@@ -578,17 +578,18 @@ body {
 
 .cal-grid-wrapper {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 40px repeat(7, minmax(0, 1fr));
+    grid-auto-rows: auto;
     overflow: auto;
 }
 
-/* 컬럼 헤더 (주 + 요일) */
+/* 컬럼 헤더 (주 + 요일) — wrapper의 컬럼 트랙 상속 */
 .cal-col-header {
     display: grid;
-    grid-template-columns: 40px repeat(7, 1fr);
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
     border-bottom: 2px solid var(--gray-200);
-    flex-shrink: 0;
 }
 
 .cal-wk-label {
@@ -615,10 +616,11 @@ body {
 .cal-weekday-sun { color: #DE350B; }
 .cal-weekday-sat { color: var(--primary-color); }
 
-/* 주별 행 (주차 + 그리드) — 헤더와 동일한 컬럼 구조 */
+/* 주별 행 — wrapper의 컬럼 트랙 상속 (subgrid) */
 .cal-row {
     display: grid;
-    grid-template-columns: 40px repeat(7, 1fr);
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
     border-bottom: 1px solid var(--gray-200);
 }
 
@@ -632,22 +634,22 @@ body {
     color: var(--gray-400);
     background: var(--gray-50);
     border-right: 1px solid var(--gray-200);
+    grid-column: 1;
     grid-row: 1 / -1;
 }
 
-/* 7일 그리드 컨테이너 — 나머지 7컬럼을 모두 차지 */
+/* 7일 그리드 컨테이너 — subgrid로 컬럼 트랙 상속 */
 .cal-row-grid {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
+    display: grid;
+    grid-template-columns: subgrid;
     grid-column: 2 / -1;
 }
 
-/* 날짜 번호 행 */
+/* 날짜 번호 행 — subgrid로 컬럼 트랙 상속 */
 .cal-day-nums {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    flex-shrink: 0;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
 }
 
 .cal-day-hdr {
@@ -682,10 +684,11 @@ body {
 .cal-sun { color: #DE350B; }
 .cal-sat { color: var(--primary-color); }
 
-/* 여러 날 스팬 바 */
+/* 여러 날 스팬 바 — subgrid로 컬럼 트랙 상속 */
 .cal-span-row {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
     padding: 1px 0;
 }
 
@@ -729,11 +732,11 @@ body {
     font-weight: 600;
 }
 
-/* 단일 이벤트 셀 */
+/* 단일 이벤트 셀 — subgrid로 컬럼 트랙 상속 */
 .cal-day-cells {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    flex: 1;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
 }
 
 .cal-day-col {
