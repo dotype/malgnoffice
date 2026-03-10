@@ -689,11 +689,10 @@ body {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
-    padding: 1px 0;
 }
 
 .cal-span-bar {
-    padding: 2px 8px;
+    padding: 0 8px;
     border-radius: 0;
     font-size: 11px;
     font-weight: 500;
@@ -701,7 +700,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
-    line-height: 1.5;
+    line-height: 20px;
     margin: 0;
     transition: filter 0.1s;
 }
@@ -722,8 +721,8 @@ body {
 }
 
 .cal-span-military {
-    background: #EAE6FF;
-    color: #403294;
+    background: #E3FCEF;
+    color: #006644;
 }
 
 .cal-span-highlight {
@@ -790,6 +789,14 @@ body {
     font-size: 11px;
 }
 
+.cal-ev-vacation {
+    background: #E3FCEF;
+    border-radius: 0;
+    padding: 0 4px;
+    line-height: 20px;
+}
+
+.cal-ev-vacation .cal-ev-dot { display: none; }
 .cal-ev-vacation .cal-ev-label { color: #006644; }
 .cal-ev-education .cal-ev-label { color: #E65100; }
 .cal-ev-schedule .cal-ev-label { color: var(--gray-700); }
