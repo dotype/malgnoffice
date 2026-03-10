@@ -683,21 +683,21 @@ body {
 .cal-span-row {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    height: 18px;
+    height: 21px;
 }
 
 .cal-span-bar {
     padding: 0 4px 0 12px;
     border-radius: 0;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
-    height: 18px;
-    line-height: 18px;
-    margin: 0;
+    height: 20px;
+    line-height: 20px;
+    margin: 0.5px 0;
     transition: filter 0.1s;
 }
 
@@ -749,9 +749,10 @@ body {
     align-items: center;
     padding: 0 4px 0 4px;
     border-radius: 0;
-    font-size: 11px;
-    height: 18px;
-    line-height: 18px;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0.5px 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -781,7 +782,7 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--gray-700);
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .cal-ev-vacation {
