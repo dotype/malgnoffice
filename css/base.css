@@ -439,7 +439,7 @@ body {
     cursor: pointer;
 }
 
-/* ==================== 캘린더 (Jira Style) ==================== */
+/* ==================== 캘린더 ==================== */
 .cal-page {
     display: flex;
     flex-direction: column;
@@ -447,162 +447,127 @@ body {
     background: white;
 }
 
-/* 헤더 */
-.cal-header {
-    padding: 20px 24px 16px;
+/* 필터 바 (구분 체크박스) */
+.cal-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
     border-bottom: 1px solid var(--gray-200);
     flex-shrink: 0;
 }
 
-.cal-header-top {
+.cal-filter-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+    padding: 4px 12px;
+    background: var(--gray-100);
+    border-radius: 4px;
+}
+
+.cal-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--gray-700);
+    cursor: pointer;
+    user-select: none;
+}
+
+.cal-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* 네비게이션 바 */
+.cal-nav-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--gray-200);
+    flex-shrink: 0;
     gap: 16px;
     flex-wrap: wrap;
 }
 
-.cal-header-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.cal-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--gray-900);
-    margin: 0;
-}
-
-.cal-nav-arrows {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.cal-nav-btn {
-    background: none;
-    border: 1px solid var(--gray-200);
-    border-radius: 4px;
-    padding: 4px 10px;
-    font-size: 13px;
-    color: var(--gray-600);
-    cursor: pointer;
-    transition: background 0.1s, border-color 0.1s;
-}
-
-.cal-nav-btn:hover {
-    background: var(--gray-50);
-    border-color: var(--gray-300);
-}
-
-.cal-month-label {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--gray-900);
-}
-
-.cal-header-right {
+.cal-nav-left {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.cal-filters {
-    display: flex;
-    gap: 6px;
+.cal-today-label {
+    font-size: 13px;
+    color: var(--gray-600);
+    white-space: nowrap;
 }
 
-.cal-filter-chip {
+.cal-nav-arrow {
+    background: none;
+    border: 1px solid var(--gray-300);
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    border: 1px solid var(--gray-200);
-    background: white;
-    border-radius: 20px;
-    padding: 4px 12px;
+    justify-content: center;
     font-size: 12px;
     color: var(--gray-600);
     cursor: pointer;
-    transition: all 0.15s;
+    transition: background 0.1s, border-color 0.1s;
 }
 
-.cal-filter-chip.active {
-    border-color: var(--primary-color);
-    background: var(--primary-light);
-    color: var(--primary-color);
+.cal-nav-arrow:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-400);
 }
 
-.cal-filter-chip:hover {
-    border-color: var(--gray-300);
+.cal-month-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-left: 4px;
 }
 
-.cal-chip-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    transition: background 0.15s;
-}
-
-.cal-add-wrap {
-    position: relative;
-}
-
-.cal-add-btn {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.1s;
-}
-
-.cal-add-btn:hover {
-    background: var(--primary-hover);
-}
-
-.cal-add-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 4px;
-    background: white;
-    border: 1px solid var(--gray-200);
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    min-width: 160px;
-    z-index: 100;
-    padding: 4px 0;
-}
-
-.cal-add-menu-item {
+.cal-nav-right {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 14px;
-    font-size: 13px;
-    color: var(--gray-900);
+    flex-wrap: wrap;
+}
+
+/* 등록 버튼들 */
+.cal-reg-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
     cursor: pointer;
-    transition: background 0.1s;
+    transition: filter 0.15s;
+    white-space: nowrap;
 }
 
-.cal-add-menu-item:hover {
-    background: var(--gray-100);
+.cal-reg-btn:hover {
+    filter: brightness(0.9);
 }
 
-.cal-add-menu-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
+.cal-reg-btn i {
+    font-size: 10px;
 }
+
+.cal-reg-schedule { background: #2962FF; }
+.cal-reg-education { background: #FF6D00; }
+.cal-reg-vacation { background: #00C853; }
+.cal-reg-holiday { background: #9C27B0; }
 
 /* 바디 */
 .cal-body {
@@ -799,13 +764,18 @@ body {
     background: var(--gray-100);
 }
 
-.cal-ev-bar {
-    width: 3px;
-    min-height: 13px;
-    border-radius: 2px;
+/* 이벤트 도트 */
+.cal-ev-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     flex-shrink: 0;
-    margin-right: 5px;
+    margin-right: 4px;
 }
+
+.cal-ev-dot-schedule { background: #2962FF; }
+.cal-ev-dot-education { background: #FF6D00; }
+.cal-ev-dot-vacation { background: #00C853; }
 
 .cal-ev-label {
     overflow: hidden;
@@ -815,12 +785,9 @@ body {
     font-size: 11px;
 }
 
-.cal-ev-vacation {
-    background: transparent;
-}
-
-.cal-ev-vacation .cal-ev-bar { background: #36B37E; }
 .cal-ev-vacation .cal-ev-label { color: #006644; }
+.cal-ev-education .cal-ev-label { color: #E65100; }
+.cal-ev-schedule .cal-ev-label { color: var(--gray-700); }
 
 /* 더보기 */
 .cal-ev-more {

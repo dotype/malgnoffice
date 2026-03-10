@@ -1,47 +1,26 @@
 <div class="cal-page">
-    <!-- 상단 헤더 -->
-    <div class="cal-header">
-        <div class="cal-header-top">
-            <div class="cal-header-left">
-                <h4 class="cal-title">캘린더</h4>
-                <div class="cal-nav-arrows">
-                    <button class="cal-nav-btn" @click="prevMonth"><i class="bi bi-chevron-left"></i></button>
-                    <button class="cal-nav-btn" @click="goToday">오늘</button>
-                    <button class="cal-nav-btn" @click="nextMonth"><i class="bi bi-chevron-right"></i></button>
-                </div>
-                <span class="cal-month-label">{{ currentYear }}년 {{ currentMonth }}월</span>
-            </div>
-            <div class="cal-header-right">
-                <div class="cal-filters">
-                    <button v-for="cat in categories" :key="cat.key" class="cal-filter-chip" :class="{ active: cat.visible }" @click="cat.visible = !cat.visible">
-                        <span class="cal-chip-dot" :style="{ background: cat.visible ? cat.color : '#B3BAC5' }"></span>
-                        {{ cat.label }}
-                    </button>
-                </div>
-                <div class="cal-add-wrap">
-                    <button class="cal-add-btn" @click="showAddMenu = !showAddMenu">
-                        <i class="bi bi-plus"></i> 일정 만들기
-                    </button>
-                    <div v-if="showAddMenu" class="cal-add-menu">
-                        <div class="cal-add-menu-item" @click="openAddForm('schedule')">
-                            <span class="cal-add-menu-dot" style="background: #2962FF"></span>
-                            일정 등록
-                        </div>
-                        <div class="cal-add-menu-item" @click="openAddForm('education')">
-                            <span class="cal-add-menu-dot" style="background: #FFD600"></span>
-                            교육 등록
-                        </div>
-                        <div class="cal-add-menu-item" @click="openAddForm('vacation')">
-                            <span class="cal-add-menu-dot" style="background: #00C853"></span>
-                            휴가 등록
-                        </div>
-                        <div class="cal-add-menu-item" @click="openAddForm('holiday')">
-                            <span class="cal-add-menu-dot" style="background: #FF5252"></span>
-                            휴일 등록
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- 상단 필터 영역 -->
+    <div class="cal-filter-bar">
+        <span class="cal-filter-label">구분</span>
+        <label v-for="cat in categories" :key="cat.key" class="cal-checkbox-label">
+            <input type="checkbox" v-model="cat.visible" class="cal-checkbox" :style="{ accentColor: cat.color }">
+            {{ cat.label }}
+        </label>
+    </div>
+
+    <!-- 네비게이션 & 등록 버튼 -->
+    <div class="cal-nav-bar">
+        <div class="cal-nav-left">
+            <span class="cal-today-label">오늘 : {{ todayLabel }}</span>
+            <button class="cal-nav-arrow" @click="prevMonth"><i class="bi bi-chevron-left"></i></button>
+            <button class="cal-nav-arrow" @click="nextMonth"><i class="bi bi-chevron-right"></i></button>
+            <span class="cal-month-title">{{ currentYear }}년 {{ String(currentMonth).padStart(2, '0') }}월</span>
+        </div>
+        <div class="cal-nav-right">
+            <button class="cal-reg-btn cal-reg-schedule" @click="openAddForm('schedule')">일정 등록 <i class="bi bi-chevron-right"></i></button>
+            <button class="cal-reg-btn cal-reg-education" @click="openAddForm('education')">직무교육 등록 <i class="bi bi-chevron-right"></i></button>
+            <button class="cal-reg-btn cal-reg-vacation" @click="openAddForm('vacation')">휴가 등록 <i class="bi bi-chevron-right"></i></button>
+            <button class="cal-reg-btn cal-reg-holiday" @click="openAddForm('holiday')">휴일 등록 <i class="bi bi-chevron-right"></i></button>
         </div>
     </div>
 
@@ -84,7 +63,7 @@
                     <div class="cal-day-cells">
                         <div v-for="(day, dIdx) in week.days" :key="'c'+dIdx" class="cal-day-col" :class="{ 'cal-day-other': !day.currentMonth, 'cal-day-today-cell': day.isToday }">
                             <div v-for="ev in day.singleEvents" :key="ev.id" class="cal-ev" :class="'cal-ev-' + ev.type">
-                                <span class="cal-ev-bar" :style="{ background: ev.type === 'schedule' ? '#2962FF' : ev.type === 'education' ? '#FF6D00' : '' }"></span>
+                                <span class="cal-ev-dot" :class="'cal-ev-dot-' + ev.type"></span>
                                 <span class="cal-ev-label">{{ ev.title }}</span>
                             </div>
                         </div>
@@ -95,9 +74,7 @@
 
         <!-- 우측 패널 -->
         <div class="cal-sidebar d-none d-xxl-flex">
-            <div class="cal-sidebar-title">
-                <i class="bi bi-star-fill text-warning me-1"></i> 이달의 주요 일정
-            </div>
+            <div class="cal-sidebar-title">이달의 주요일정</div>
             <div v-for="item in majorEvents" :key="item.id" class="cal-sidebar-card">
                 <div class="cal-sidebar-card-title">{{ item.title }}</div>
                 <div class="cal-sidebar-card-date">{{ item.datetime }}</div>
