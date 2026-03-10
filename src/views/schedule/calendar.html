@@ -53,8 +53,8 @@
                     </div>
 
                     <!-- 여러 날 걸치는 이벤트 (스팬 바) -->
-                    <div v-for="(span, sIdx) in week.spans" :key="'sp'+sIdx" class="cal-span-row">
-                        <div class="cal-span-bar" :class="'cal-span-' + span.style" :style="{ gridColumn: span.col + ' / span ' + span.width }" :title="span.title">
+                    <div v-for="(lane, lIdx) in week.spans" :key="'ln'+lIdx" class="cal-span-row">
+                        <div v-for="span in lane" :key="span.id" class="cal-span-bar" :class="'cal-span-' + span.style" :style="{ gridColumn: span.col + ' / span ' + span.width }" :title="span.title">
                             <span v-if="span.showTitle">{{ span.title }}</span>
                         </div>
                     </div>

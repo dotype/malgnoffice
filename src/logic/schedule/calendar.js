@@ -195,21 +195,17 @@ export default {
             return { day: d, month: m, year: y, dateStr, currentMonth, isToday, singleEvents };
         },
         buildSpans(weekDays, weekStart, weekEnd) {
-            const spans = [];
+            const items = [];
             const visible = this.visibleTypes;
 
             this.multiDayEvents.forEach(ev => {
-                // 카테고리 필터 체크
                 if (ev.category && !visible.includes(ev.category)) return;
                 if (!ev.category && !visible.includes(ev.style)) return;
 
                 const evStart = ev.startDate;
                 const evEnd = ev.endDate;
-
-                // 이 주와 겹치는지 확인
                 if (evEnd < weekStart || evStart > weekEnd) return;
 
-                // 시작/끝 컬럼 계산 (1-based)
                 let startCol = 1;
                 let endCol = 7;
                 for (let i = 0; i < 7; i++) {
@@ -220,19 +216,37 @@ export default {
                 if (evEnd > weekEnd) endCol = 7;
 
                 const width = endCol - startCol + 1;
-                const showTitle = evStart >= weekStart; // 첫 주에만 타이틀
+                const showTitle = evStart >= weekStart;
 
-                spans.push({
-                    id: ev.id,
-                    title: ev.title,
-                    style: ev.style,
-                    col: startCol,
-                    width,
-                    showTitle
-                });
+                items.push({ id: ev.id, title: ev.title, style: ev.style, col: startCol, width, showTitle });
             });
 
-            return spans;
+            // 레인 배치: 겹치지 않는 스팬을 같은 행에 배치
+            const lanes = [];
+            items.forEach(item => {
+                const itemEnd = item.col + item.width - 1;
+                let placed = false;
+                for (const lane of lanes) {
+                    let overlap = false;
+                    for (const existing of lane) {
+                        const existEnd = existing.col + existing.width - 1;
+                        if (!(itemEnd < existing.col || item.col > existEnd)) {
+                            overlap = true;
+                            break;
+                        }
+                    }
+                    if (!overlap) {
+                        lane.push(item);
+                        placed = true;
+                        break;
+                    }
+                }
+                if (!placed) {
+                    lanes.push([item]);
+                }
+            });
+
+            return lanes;
         },
         getWeekNum(dateStr) {
             const d = new Date(dateStr);
