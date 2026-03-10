@@ -700,7 +700,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
-    line-height: 20px;
+    line-height: 18px;
     margin: 0;
     transition: filter 0.1s;
 }
@@ -793,7 +793,7 @@ body {
     background: #E3FCEF;
     border-radius: 0;
     padding: 0 4px;
-    line-height: 20px;
+    line-height: 18px;
 }
 
 .cal-ev-vacation .cal-ev-dot { display: none; }
