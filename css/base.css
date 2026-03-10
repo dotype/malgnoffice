@@ -640,18 +640,15 @@ body {
 
 /* 7일 그리드 컨테이너 — subgrid로 컬럼 트랙 상속 */
 .cal-row-grid {
-    display: grid;
-    grid-template-columns: subgrid;
+    display: flex;
+    flex-direction: column;
     grid-column: 2 / -1;
-    row-gap: 0;
-    grid-auto-rows: min-content;
 }
 
-/* 날짜 번호 행 — subgrid로 컬럼 트랙 상속 */
+/* 날짜 번호 행 */
 .cal-day-nums {
     display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .cal-day-hdr {
@@ -686,11 +683,10 @@ body {
 .cal-sun { color: #DE350B; }
 .cal-sat { color: var(--primary-color); }
 
-/* 여러 날 스팬 바 — subgrid로 컬럼 트랙 상속 */
+/* 여러 날 스팬 바 */
 .cal-span-row {
     display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     height: 18px;
 }
 
@@ -735,11 +731,10 @@ body {
     font-weight: 600;
 }
 
-/* 단일 이벤트 셀 — subgrid로 컬럼 트랙 상속 */
+/* 단일 이벤트 셀 */
 .cal-day-cells {
     display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .cal-day-col {
