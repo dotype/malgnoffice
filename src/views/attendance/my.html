@@ -1,0 +1,70 @@
+<div class="container-fluid p-4">
+    <h2 class="mb-4">내 근태현황</h2>
+
+    <!-- 월간 요약 -->
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-secondary small mb-1">근무일</div>
+                    <div class="fs-4 fw-bold">{{ monthlySummary.workDays }}일</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-secondary small mb-1">총 근무시간</div>
+                    <div class="fs-4 fw-bold">{{ monthlySummary.totalHours }}h</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-secondary small mb-1">지각</div>
+                    <div class="fs-4 fw-bold text-danger">{{ monthlySummary.late }}회</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-secondary small mb-1">조퇴</div>
+                    <div class="fs-4 fw-bold text-warning">{{ monthlySummary.earlyLeave }}회</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 월별 상세 -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+            <h6 class="mb-0 fw-bold">{{ currentMonth }}월 근태 상세</h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>날짜</th>
+                            <th>출근</th>
+                            <th>퇴근</th>
+                            <th>근무시간</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="record in records" :key="record.date">
+                            <td class="fw-medium">{{ record.date }}</td>
+                            <td>{{ record.checkIn }}</td>
+                            <td>{{ record.checkOut }}</td>
+                            <td>{{ record.hours }}</td>
+                            <td><span class="badge" :class="getStatusClass(record.status)">{{ record.status }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

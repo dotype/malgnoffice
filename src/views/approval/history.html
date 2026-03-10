@@ -1,0 +1,46 @@
+<div class="container-fluid p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">결재 이력</h2>
+        <button class="btn btn-primary" @click="navigateTo('/approval/request')">
+            <i class="bi bi-plus-lg me-1"></i> 결재 요청
+        </button>
+    </div>
+
+    <!-- 필터 -->
+    <div class="d-flex gap-2 mb-3">
+        <button v-for="filter in filters" :key="filter.value" class="btn btn-sm" :class="currentFilter === filter.value ? 'btn-primary' : 'btn-outline-secondary'" @click="currentFilter = filter.value">
+            {{ filter.label }}
+        </button>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>유형</th>
+                            <th>제목</th>
+                            <th>요청자</th>
+                            <th>결재자</th>
+                            <th>요청일</th>
+                            <th>처리일</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in filteredHistory" :key="item.id">
+                            <td><span class="badge" :class="getTypeClass(item.type)">{{ item.type }}</span></td>
+                            <td class="fw-medium">{{ item.title }}</td>
+                            <td>{{ item.requester }}</td>
+                            <td>{{ item.approver }}</td>
+                            <td class="text-secondary">{{ item.requestDate }}</td>
+                            <td class="text-secondary">{{ item.processDate || '-' }}</td>
+                            <td><span class="badge" :class="getStatusClass(item.status)">{{ item.status }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

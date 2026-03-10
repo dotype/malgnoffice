@@ -1,0 +1,67 @@
+<div class="container-fluid p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">휴가 관리</h2>
+        <button class="btn btn-primary" @click="navigateTo('/approval/request')">
+            <i class="bi bi-plus-lg me-1"></i> 휴가 신청
+        </button>
+    </div>
+
+    <!-- 연차 현황 -->
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-secondary small mb-1">총 연차</div>
+                    <div class="fs-3 fw-bold">{{ vacationSummary.total }}일</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-secondary small mb-1">사용</div>
+                    <div class="fs-3 fw-bold text-primary">{{ vacationSummary.used }}일</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-secondary small mb-1">잔여</div>
+                    <div class="fs-3 fw-bold text-success">{{ vacationSummary.remaining }}일</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 휴가 사용 내역 -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-bottom">
+            <h6 class="mb-0 fw-bold">휴가 사용 내역</h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>기간</th>
+                            <th>유형</th>
+                            <th>일수</th>
+                            <th>사유</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in vacationHistory" :key="item.id">
+                            <td class="fw-medium">{{ item.period }}</td>
+                            <td>{{ item.type }}</td>
+                            <td>{{ item.days }}일</td>
+                            <td>{{ item.reason }}</td>
+                            <td><span class="badge" :class="getStatusClass(item.status)">{{ item.status }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

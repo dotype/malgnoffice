@@ -4,16 +4,18 @@ export default {
         const path = window.location.hash.substring(1);
         let initialOpenAccordions = [];
 
-        if (path.startsWith('/users')) {
-            initialOpenAccordions = ['users'];
-        } else if (path.startsWith('/products')) {
-            initialOpenAccordions = ['products'];
-        } else if (path.startsWith('/orders')) {
-            initialOpenAccordions = ['orders'];
-        } else if (path.startsWith('/stats')) {
-            initialOpenAccordions = ['stats'];
-        } else if (path.startsWith('/site')) {
-            initialOpenAccordions = ['site'];
+        if (path.startsWith('/schedule')) {
+            initialOpenAccordions = ['schedule'];
+        } else if (path.startsWith('/attendance')) {
+            initialOpenAccordions = ['attendance'];
+        } else if (path.startsWith('/work')) {
+            initialOpenAccordions = ['work'];
+        } else if (path.startsWith('/approval')) {
+            initialOpenAccordions = ['approval'];
+        } else if (path.startsWith('/board')) {
+            initialOpenAccordions = ['board'];
+        } else if (path.startsWith('/organization')) {
+            initialOpenAccordions = ['organization'];
         } else if (path.startsWith('/settings')) {
             initialOpenAccordions = ['settings'];
         }
@@ -79,16 +81,18 @@ export default {
         openCurrentAccordion() {
             const path = window.location.hash.substring(1);
 
-            if (path.startsWith('/users')) {
-                this.openAccordions = ['users'];
-            } else if (path.startsWith('/products')) {
-                this.openAccordions = ['products'];
-            } else if (path.startsWith('/orders')) {
-                this.openAccordions = ['orders'];
-            } else if (path.startsWith('/stats')) {
-                this.openAccordions = ['stats'];
-            } else if (path.startsWith('/site')) {
-                this.openAccordions = ['site'];
+            if (path.startsWith('/schedule')) {
+                this.openAccordions = ['schedule'];
+            } else if (path.startsWith('/attendance')) {
+                this.openAccordions = ['attendance'];
+            } else if (path.startsWith('/work')) {
+                this.openAccordions = ['work'];
+            } else if (path.startsWith('/approval')) {
+                this.openAccordions = ['approval'];
+            } else if (path.startsWith('/board')) {
+                this.openAccordions = ['board'];
+            } else if (path.startsWith('/organization')) {
+                this.openAccordions = ['organization'];
             } else if (path.startsWith('/settings')) {
                 this.openAccordions = ['settings'];
             }
@@ -119,13 +123,9 @@ export default {
                 this.showUserMenu = false;
             }
         },
-        goToAccount() {
+        goToProfile() {
             this.showUserMenu = false;
-            this.navigateTo('/settings/account');
-        },
-        goToAPISettings() {
-            this.showUserMenu = false;
-            this.navigateTo('/settings/api');
+            this.navigateTo('/settings/profile');
         },
         handleLogout() {
             this.showUserMenu = false;

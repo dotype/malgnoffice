@@ -1,61 +1,268 @@
 /* ==================== CSS 변수 ==================== */
 :root {
-    /* 주요 색상 */
-    --primary-color: #6366f1;
-    --danger-color: #ef4444;
+    /* Jira 스타일 색상 */
+    --primary-color: #0052CC;
+    --primary-hover: #0065FF;
+    --primary-light: #DEEBFF;
+    --danger-color: #DE350B;
+    --success-color: #00875A;
+    --warning-color: #FF991F;
+
+    /* 네이비 계열 */
+    --nav-bg: #0C2340;
+    --nav-bg-hover: #13345B;
+    --nav-bg-active: #1B4D89;
+    --nav-text: #B8C7D9;
+    --nav-text-active: #FFFFFF;
 
     /* 회색 음영 */
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-900: #111827;
+    --gray-50: #FAFBFC;
+    --gray-100: #F4F5F7;
+    --gray-200: #EBECF0;
+    --gray-300: #DFE1E6;
+    --gray-400: #B3BAC5;
+    --gray-500: #6B778C;
+    --gray-600: #505F79;
+    --gray-700: #42526E;
+    --gray-900: #172B4D;
 
     /* 레이아웃 */
-    --header-height: 64px;
-    --sidebar-width: 260px;
-
+    --header-height: 56px;
+    --sidebar-width: 240px;
 
     /* 그림자 */
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-sm: 0 1px 2px rgba(9, 30, 66, 0.08);
+    --shadow-md: 0 4px 8px -2px rgba(9, 30, 66, 0.13), 0 0 1px rgba(9, 30, 66, 0.2);
+    --shadow-lg: 0 8px 16px -4px rgba(9, 30, 66, 0.13), 0 0 1px rgba(9, 30, 66, 0.2);
 }
 
 /* ==================== 전역 스타일 ==================== */
 * {
     box-sizing: border-box;
     scrollbar-width: thin;
-    scrollbar-color: var(--gray-200) transparent;
+    scrollbar-color: var(--gray-300) transparent;
 }
 
 body {
     margin: 0;
-    font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: var(--gray-50);
+    font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--gray-100);
     color: var(--gray-900);
+    font-size: 14px;
 }
 
 /* ==================== 레이아웃 ==================== */
 .app-layout {
     display: flex;
-    flex-direction: column;
     height: 100vh;
     overflow: hidden;
 }
 
-/* 헤더 */
+/* ==================== 사이드바 ==================== */
+.app-sidebar {
+    width: var(--sidebar-width);
+    background: var(--nav-bg);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin-left: calc(-1 * var(--sidebar-width));
+    transition: margin-left 0.2s ease;
+    z-index: 1000;
+}
+
+.app-sidebar.show {
+    margin-left: 0;
+}
+
+/* 사이드바 헤더 (로고 영역) */
+.sidebar-header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--nav-text-active);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.sidebar-logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-color);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: white;
+}
+
+/* 사이드바 네비게이션 */
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+/* 네비게이션 섹션 라벨 */
+.nav-section-label {
+    padding: 16px 16px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--nav-text);
+    opacity: 0.5;
+    letter-spacing: 0.5px;
+}
+
+/* 네비게이션 링크 */
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 16px;
+    margin: 1px 8px;
+    color: var(--nav-text);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.1s, color 0.1s;
+    font-size: 13.5px;
+    font-weight: 400;
+    position: relative;
+}
+
+.nav-link:hover {
+    background: var(--nav-bg-hover);
+    color: var(--nav-text-active);
+}
+
+.nav-link.active {
+    background: var(--nav-bg-active);
+    color: var(--nav-text-active);
+    font-weight: 500;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.nav-link.active i {
+    opacity: 1;
+}
+
+.nav-label {
+    font-size: 13.5px;
+}
+
+/* 아코디언 */
+.accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 16px;
+    margin: 1px 8px;
+    color: var(--nav-text);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.1s, color 0.1s;
+    font-size: 13.5px;
+    font-weight: 500;
+}
+
+.accordion-header:hover {
+    background: var(--nav-bg-hover);
+    color: var(--nav-text-active);
+}
+
+.accordion-header.active {
+    color: var(--nav-text-active);
+}
+
+.accordion-header .icon {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.accordion-header.active .icon {
+    opacity: 1;
+}
+
+.accordion-header .chevron {
+    margin-left: auto;
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+    opacity: 0.5;
+}
+
+.accordion-header.active .chevron {
+    transform: rotate(-180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+}
+
+.accordion-content.open {
+    max-height: 500px;
+}
+
+.accordion-content .nav-link {
+    padding: 6px 16px 6px 48px;
+    font-size: 13px;
+    margin: 0 8px;
+}
+
+/* 사이드바 푸터 */
+.sidebar-footer {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==================== 오른쪽 영역 (헤더 + 메인) ==================== */
+.app-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* ==================== 헤더 ==================== */
 .app-header {
     height: var(--header-height);
     background: white;
     border-bottom: 1px solid var(--gray-200);
     display: flex;
     align-items: center;
-    padding: 0 1rem;
-    gap: 1rem;
-    z-index: 1000;
+    padding: 0 16px;
+    gap: 12px;
+    z-index: 100;
+    flex-shrink: 0;
 }
 
 .header-side {
@@ -66,56 +273,29 @@ body {
 .header-hamburger {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--gray-600);
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background-color 0.1s;
 }
 
 .header-hamburger:hover {
     background: var(--gray-100);
 }
 
-.header-search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    max-width: 400px;
-    width: 100%;
-}
-
-.header-search i {
-    position: absolute;
-    left: 1rem;
-    color: var(--gray-400);
-}
-
-.header-search input {
-    width: 100%;
-    padding: 0.5rem 1rem 0.5rem 2.5rem;
-    border: 1px solid var(--gray-300);
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-}
-
-.header-search input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-}
-
+/* 헤더 액션 버튼 */
 .header-action {
     position: relative;
     background: none;
     border: none;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: var(--gray-600);
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background-color 0.1s;
 }
 
 .header-action:hover {
@@ -124,27 +304,28 @@ body {
 
 .header-action .badge {
     position: absolute;
-    top: 0.25rem;
-    right: 0.25rem;
+    top: 2px;
+    right: 2px;
     background: var(--danger-color);
     color: white;
-    font-size: 0.625rem;
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.75rem;
-    min-width: 1.25rem;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 10px;
+    min-width: 16px;
     text-align: center;
+    line-height: 1.4;
 }
 
-/* 사용자 메뉴 */
+/* ==================== 사용자 메뉴 ==================== */
 .user-menu {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.1s;
 }
 
 .user-menu:hover {
@@ -152,8 +333,8 @@ body {
 }
 
 .user-avatar {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: var(--primary-color);
     color: white;
@@ -161,6 +342,7 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: 600;
+    font-size: 13px;
 }
 
 .user-info {
@@ -169,13 +351,13 @@ body {
 }
 
 .user-name {
-    font-size: 0.875rem;
+    font-size: 13px;
     font-weight: 500;
     color: var(--gray-900);
 }
 
 .user-role {
-    font-size: 0.75rem;
+    font-size: 11px;
     color: var(--gray-500);
 }
 
@@ -183,20 +365,20 @@ body {
     position: absolute;
     top: 100%;
     right: 0;
-    margin-top: 0.5rem;
+    margin-top: 4px;
     background: white;
-    border: 1px solid var(--gray-200);
-    border-radius: 0.5rem;
+    border-radius: 4px;
     box-shadow: var(--shadow-lg);
     min-width: 200px;
     z-index: 1001;
+    border: 1px solid var(--gray-200);
 }
 
 .user-dropdown-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: 10px;
+    padding: 8px 16px;
     color: var(--gray-700);
     text-decoration: none;
     border: none;
@@ -204,7 +386,8 @@ body {
     width: 100%;
     text-align: left;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-size: 13px;
+    transition: background-color 0.1s;
 }
 
 .user-dropdown-item:hover {
@@ -213,11 +396,12 @@ body {
 
 .user-dropdown-item i {
     font-size: 1rem;
+    width: 18px;
+    text-align: center;
 }
 
-/* Body */
+/* ==================== Body ==================== */
 .app-body {
-    display: flex;
     flex: 1;
     overflow: hidden;
     position: relative;
@@ -227,14 +411,14 @@ body {
 .sidebar-overlay {
     display: none;
     position: fixed;
-    top: var(--header-height);
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(9, 30, 66, 0.54);
     z-index: 999;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.2s;
 }
 
 .sidebar-overlay.show {
@@ -242,111 +426,12 @@ body {
     opacity: 1;
 }
 
-/* 사이드바 */
-.app-sidebar {
-    width: var(--sidebar-width);
-    background: white;
-    border-right: 1px solid var(--gray-200);
-    overflow-y: auto;
-    flex-shrink: 0;
-    margin-left: calc(-1 * var(--sidebar-width));
-    transition: margin-left 0.3s;
-}
-
-.app-sidebar.show {
-    margin-left: 0;
-}
-
-
-/* 네비게이션 */
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    color: var(--gray-700);
-    text-decoration: none;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.nav-link:hover {
-    background: var(--gray-100);
-    color: var(--gray-900);
-}
-
-.nav-link.active {
-    background: var(--primary-color);
-    color: white;
-}
-
-.nav-link i {
-    font-size: 1.25rem;
-    width: 1.5rem;
-    text-align: center;
-}
-
-.nav-label {
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-/* 아코디언 */
-.accordion-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    color: var(--gray-700);
-    cursor: pointer;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s;
-}
-
-.accordion-header:hover {
-    background: var(--gray-100);
-}
-
-.accordion-header.active {
-    background: var(--gray-100);
-    color: var(--gray-900);
-}
-
-.accordion-header .icon {
-    font-size: 1.25rem;
-    width: 1.5rem;
-    text-align: center;
-}
-
-.accordion-header .chevron {
-    margin-left: auto;
-    transition: transform 0.3s;
-}
-
-.accordion-header.active .chevron {
-    transform: rotate(-180deg);
-}
-
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.accordion-content.open {
-    max-height: 500px;
-}
-
-.accordion-content .nav-link {
-    padding-left: 3rem;
-    font-size: 0.875rem;
-}
-
 /* 메인 콘텐츠 */
 .app-main {
     flex: 1;
     overflow-y: auto;
-    background: var(--gray-50);
+    background: var(--gray-100);
+    height: 100%;
 }
 
 /* ==================== 유틸리티 ==================== */
@@ -354,30 +439,458 @@ body {
     cursor: pointer;
 }
 
-/* ==================== 반응형 ==================== */
-/* 모바일 + 태블릿: 사이드바 오버레이 방식 */
-@media (max-width: 1024px) {
-    .header-search {
-        display: none;
-    }
+/* ==================== 캘린더 (Jira Style) ==================== */
+.cal-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+}
 
+/* 헤더 */
+.cal-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    flex-shrink: 0;
+}
+
+.cal-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.cal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cal-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0;
+}
+
+.cal-nav-arrows {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.cal-nav-btn {
+    background: none;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: background 0.1s, border-color 0.1s;
+}
+
+.cal-nav-btn:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-300);
+}
+
+.cal-month-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.cal-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cal-filters {
+    display: flex;
+    gap: 6px;
+}
+
+.cal-filter-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--gray-200);
+    background: white;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.cal-filter-chip.active {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.cal-filter-chip:hover {
+    border-color: var(--gray-300);
+}
+
+.cal-chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: background 0.15s;
+}
+
+.cal-add-wrap {
+    position: relative;
+}
+
+.cal-add-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.cal-add-btn:hover {
+    background: var(--primary-hover);
+}
+
+.cal-add-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    min-width: 160px;
+    z-index: 100;
+    padding: 4px 0;
+}
+
+.cal-add-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    color: var(--gray-900);
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.cal-add-menu-item:hover {
+    background: var(--gray-100);
+}
+
+.cal-add-menu-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* 바디 */
+.cal-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.cal-grid-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+/* 컬럼 헤더 (주 + 요일) */
+.cal-col-header {
+    display: grid;
+    grid-template-columns: 40px repeat(7, 1fr);
+    border-bottom: 2px solid var(--gray-200);
+    flex-shrink: 0;
+}
+
+.cal-wk-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-400);
+    background: var(--gray-50);
+    border-right: 1px solid var(--gray-200);
+}
+
+.cal-weekday {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--gray-500);
+    background: var(--gray-50);
+}
+
+.cal-weekday-sun { color: #DE350B; }
+.cal-weekday-sat { color: var(--primary-color); }
+
+/* 주별 행 (주차 + 그리드) */
+.cal-row {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+/* 주차 번호 */
+.cal-wk-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-400);
+    background: var(--gray-50);
+    border-right: 1px solid var(--gray-200);
+}
+
+/* 7일 그리드 컨테이너 */
+.cal-row-grid {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* 날짜 번호 행 */
+.cal-day-nums {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex-shrink: 0;
+}
+
+.cal-day-hdr {
+    padding: 6px 8px 2px;
+    border-right: 1px solid var(--gray-100);
+}
+
+.cal-day-hdr:last-child { border-right: none; }
+
+.cal-day-other .cal-day-n { color: var(--gray-300); }
+.cal-day-today-cell { background: #F0F4FF; }
+
+.cal-day-n {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+    line-height: 1;
+}
+
+.cal-today-n {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: var(--primary-color);
+    color: white !important;
+    border-radius: 50%;
+    font-weight: 600;
+}
+
+.cal-sun { color: #DE350B; }
+.cal-sat { color: var(--primary-color); }
+
+/* 여러 날 스팬 바 */
+.cal-span-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 1px 0;
+}
+
+.cal-span-bar {
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    line-height: 1.5;
+    margin: 0 2px;
+    transition: filter 0.1s;
+}
+
+.cal-span-bar:hover {
+    filter: brightness(0.92);
+}
+
+.cal-span-holiday {
+    background: #FFEBE6;
+    color: #BF2600;
+    font-weight: 600;
+}
+
+.cal-span-vacation {
+    background: #E3FCEF;
+    color: #006644;
+}
+
+.cal-span-military {
+    background: #EAE6FF;
+    color: #403294;
+}
+
+.cal-span-highlight {
+    background: #DEEBFF;
+    color: #0747A6;
+    font-weight: 600;
+}
+
+/* 단일 이벤트 셀 */
+.cal-day-cells {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex: 1;
+}
+
+.cal-day-col {
+    padding: 2px 4px;
+    border-right: 1px solid var(--gray-100);
+}
+
+.cal-day-col:last-child { border-right: none; }
+
+.cal-day-col.cal-day-other { background: var(--gray-50); }
+.cal-day-col.cal-day-today-cell { background: #F0F4FF; }
+
+/* 단일 이벤트 아이템 */
+.cal-ev {
+    display: flex;
+    align-items: center;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 11px;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    margin-bottom: 1px;
+    transition: background 0.1s;
+}
+
+.cal-ev:hover {
+    background: var(--gray-100);
+}
+
+.cal-ev-bar {
+    width: 3px;
+    min-height: 13px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-right: 5px;
+}
+
+.cal-ev-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--gray-700);
+    font-size: 11px;
+}
+
+.cal-ev-vacation {
+    background: transparent;
+}
+
+.cal-ev-vacation .cal-ev-bar { background: #36B37E; }
+.cal-ev-vacation .cal-ev-label { color: #006644; }
+
+/* 더보기 */
+.cal-ev-more {
+    font-size: 10px;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 1px 4px;
+    font-weight: 500;
+}
+
+.cal-ev-more:hover { text-decoration: underline; }
+
+/* 우측 사이드바 */
+.cal-sidebar {
+    width: 240px;
+    min-width: 240px;
+    border-left: 1px solid var(--gray-200);
+    background: var(--gray-50);
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.cal-sidebar-title {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-900);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.cal-sidebar-card {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--gray-200);
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.cal-sidebar-card:hover { background: white; }
+
+.cal-sidebar-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 4px;
+}
+
+.cal-sidebar-card-date {
+    font-size: 11px;
+    color: var(--gray-500);
+    line-height: 1.4;
+}
+
+/* ==================== 반응형 ==================== */
+@media (max-width: 1024px) {
     .user-info {
         display: none;
     }
 
     .app-sidebar {
         position: fixed;
-        top: var(--header-height);
+        top: 0;
         left: 0;
         bottom: 0;
         z-index: 1000;
         margin-left: 0;
         transform: translateX(-100%);
-        transition: transform 0.3s;
+        transition: transform 0.2s ease;
     }
 
     .app-sidebar.show {
         transform: translateX(0);
     }
 }
-

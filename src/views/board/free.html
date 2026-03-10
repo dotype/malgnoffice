@@ -1,0 +1,43 @@
+<div class="container-fluid p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">자유게시판</h2>
+        <button class="btn btn-primary">
+            <i class="bi bi-plus-lg me-1"></i> 글쓰기
+        </button>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 60px;" class="text-center">번호</th>
+                            <th>제목</th>
+                            <th style="width: 100px;">작성자</th>
+                            <th style="width: 100px;">작성일</th>
+                            <th style="width: 70px;" class="text-center">조회</th>
+                            <th style="width: 70px;" class="text-center">댓글</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="post in posts" :key="post.id" class="cursor-pointer">
+                            <td class="text-center">{{ post.id }}</td>
+                            <td class="fw-medium">
+                                {{ post.title }}
+                                <span v-if="post.isNew" class="badge bg-primary ms-1">N</span>
+                            </td>
+                            <td>{{ post.author }}</td>
+                            <td class="text-secondary">{{ post.date }}</td>
+                            <td class="text-center text-secondary">{{ post.views }}</td>
+                            <td class="text-center">
+                                <span v-if="post.comments > 0" class="text-primary fw-medium">[{{ post.comments }}]</span>
+                                <span v-else class="text-secondary">0</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

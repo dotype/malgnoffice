@@ -1,0 +1,54 @@
+<div class="container-fluid p-4">
+    <h2 class="mb-4">결재 요청</h2>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <form @submit.prevent="handleSubmit">
+                <div class="mb-3">
+                    <label class="form-label fw-medium">결재 유형</label>
+                    <select v-model="form.type" class="form-select">
+                        <option value="">선택하세요</option>
+                        <option value="vacation">휴가 신청</option>
+                        <option value="expense">경비 청구</option>
+                        <option value="overtime">야근 신청</option>
+                        <option value="business">출장 신청</option>
+                        <option value="purchase">구매 요청</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-medium">제목</label>
+                    <input v-model="form.title" type="text" class="form-control" placeholder="결재 제목을 입력하세요" required>
+                </div>
+                <div v-if="form.type === 'vacation'" class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-medium">시작일</label>
+                        <input v-model="form.startDate" type="date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-medium">종료일</label>
+                        <input v-model="form.endDate" type="date" class="form-control">
+                    </div>
+                </div>
+                <div v-if="form.type === 'expense'" class="mb-3">
+                    <label class="form-label fw-medium">금액</label>
+                    <input v-model="form.amount" type="number" class="form-control" placeholder="금액 입력">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-medium">상세 내용</label>
+                    <textarea v-model="form.content" class="form-control" rows="5" placeholder="상세 내용을 작성하세요"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-medium">결재자</label>
+                    <select v-model="form.approver" class="form-select">
+                        <option value="">선택하세요</option>
+                        <option v-for="approver in approvers" :key="approver.id" :value="approver.id">{{ approver.name }} ({{ approver.position }})</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">결재 요청</button>
+                    <button type="button" class="btn btn-outline-secondary" @click="navigateTo('/approval/history')">취소</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

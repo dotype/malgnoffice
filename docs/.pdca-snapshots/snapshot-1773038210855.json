@@ -1,0 +1,301 @@
+{
+  "timestamp": "2026-03-09T06:36:50.854Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-03-09T06:35:59.342Z",
+    "activeFeatures": [
+      "layout",
+      "logic",
+      "schedule",
+      "attendance",
+      "work",
+      "approval",
+      "board",
+      "organization",
+      "settings"
+    ],
+    "primaryFeature": "layout",
+    "features": {
+      "layout": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:36:23.158Z",
+          "lastUpdated": "2026-03-09T05:36:41.004Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/layout/default.js"
+      },
+      "logic": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:47:12.482Z",
+          "lastUpdated": "2026-03-09T05:47:12.482Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/home.js"
+      },
+      "schedule": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:47:34.399Z",
+          "lastUpdated": "2026-03-09T06:35:59.341Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/schedule/calendar.js"
+      },
+      "attendance": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:48:20.989Z",
+          "lastUpdated": "2026-03-09T05:48:44.005Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/attendance/vacation.js"
+      },
+      "work": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:49:06.053Z",
+          "lastUpdated": "2026-03-09T05:49:16.919Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/work/team.js"
+      },
+      "approval": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:49:27.727Z",
+          "lastUpdated": "2026-03-09T05:50:01.239Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/approval/history.js"
+      },
+      "board": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:50:17.681Z",
+          "lastUpdated": "2026-03-09T05:50:27.942Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/board/free.js"
+      },
+      "organization": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:50:41.779Z",
+          "lastUpdated": "2026-03-09T05:50:59.815Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/organization/members.js"
+      },
+      "settings": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-09T05:51:10.042Z",
+          "lastUpdated": "2026-03-09T05:51:20.163Z"
+        },
+        "lastFile": "/Users/dotype/Projects/malgnoffice/src/logic/settings/general.js"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-03-09T01:44:31.590Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-03-09T06:35:59.342Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-03-09T05:36:23.158Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:36:29.334Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:36:41.004Z",
+        "feature": "layout",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:47:12.482Z",
+        "feature": "logic",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:47:34.399Z",
+        "feature": "schedule",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:47:47.513Z",
+        "feature": "schedule",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:47:59.719Z",
+        "feature": "schedule",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:48:20.989Z",
+        "feature": "attendance",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:48:32.480Z",
+        "feature": "attendance",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:48:44.005Z",
+        "feature": "attendance",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:49:06.053Z",
+        "feature": "work",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:49:16.919Z",
+        "feature": "work",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:49:27.727Z",
+        "feature": "approval",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:49:47.441Z",
+        "feature": "approval",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:50:01.239Z",
+        "feature": "approval",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:50:17.681Z",
+        "feature": "board",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:50:27.942Z",
+        "feature": "board",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:50:41.779Z",
+        "feature": "organization",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:50:59.815Z",
+        "feature": "organization",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:51:10.042Z",
+        "feature": "settings",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T05:51:20.163Z",
+        "feature": "settings",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T06:15:27.699Z",
+        "feature": "schedule",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T06:20:36.639Z",
+        "feature": "schedule",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T06:20:41.411Z",
+        "feature": "schedule",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-09T06:35:59.342Z",
+        "feature": "schedule",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}
