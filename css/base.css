@@ -695,7 +695,7 @@ body {
 }
 
 .cal-span-bar {
-    padding: 0 8px;
+    padding: 0 4px 0 12px;
     border-radius: 0;
     font-size: 11px;
     font-weight: 500;
@@ -756,7 +756,7 @@ body {
 .cal-ev {
     display: flex;
     align-items: center;
-    padding: 0 4px;
+    padding: 0 4px 0 4px;
     border-radius: 0;
     font-size: 11px;
     height: 18px;
@@ -772,13 +772,13 @@ body {
     background: var(--gray-100);
 }
 
-/* 이벤트 도트 */
+/* 이벤트 세로 바 */
 .cal-ev-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+    width: 3px;
+    min-height: 12px;
+    border-radius: 1px;
     flex-shrink: 0;
-    margin-right: 4px;
+    margin-right: 5px;
 }
 
 .cal-ev-dot-schedule { background: #2962FF; }
@@ -797,7 +797,7 @@ body {
     background: #E3FCEF;
 }
 
-.cal-ev-vacation .cal-ev-dot { display: none; }
+.cal-ev-vacation .cal-ev-dot { background: transparent; }
 .cal-ev-vacation .cal-ev-label { color: #006644; }
 .cal-ev-education .cal-ev-label { color: #E65100; }
 .cal-ev-schedule .cal-ev-label { color: var(--gray-700); }
